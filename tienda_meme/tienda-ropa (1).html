@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver's - Feria de ropa</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #a50024c9;
+            --color-secondary: #7d9d72;
+            --color-accent: #8b6f47;
+            --color-light-green:#b8d4a8;
+            --color-cream: #f9f6f1;
+            --color-moss: #5f7356;
+            --color-brown: #ac062a;
+            --color-brown-light: #f8e9c0;
+            --color-brown-soft: #ffac53;
+            --color-text: #3d3228;
+            --color-light: #ffffff;
+            --font-display: 'Dancing Script', cursive;
+            --font-script: 'Dancing Script', cursive;
+            --font-body: 'Dancing Script', cursive;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family:'Dancing Script', cursive;
+            color: var(--color-text);
+            background-color: var(--color-brown-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: url("imagenes/fondoflores.jpeg") center/cover no-repeat;
+            position: relative;
+            overflow: hidden;
+            border-bottom-left-radius: 50% 30px;
+            border-bottom-right-radius: 50% 30px;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 15% 25%, rgba(74, 103, 65, 0.1) 0%, transparent 45%),
+                radial-gradient(circle at 85% 75%, rgba(139, 111, 71, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(107, 83, 68, 0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        
+        header::after {
+            content: '✦';
+            position: absolute;
+            font-size: 3rem;
+            color: rgba(125, 157, 114, 0.15);
+            animation: floatSparkle 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes floatSparkle {
+            0%, 100% { 
+                top: 20%;
+                left: 15%;
+                opacity: 0.15;
+                transform: rotate(0deg) scale(1);
+            }
+            50% { 
+                top: 25%;
+                left: 18%;
+                opacity: 0.3;
+                transform: rotate(180deg) scale(1.2);
+            }
+        }
+        
+        .brand-name {
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            position: relative;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out forwards;
+            text-shadow: 2px 2px 4px rgba(74, 103, 65, 0.1);
+        }
+        
+        .tagline {
+            font-family: var(--font-script);
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            font-weight: 400;
+            color: var(--color-brown);
+            letter-spacing: 0.15em;
+            text-transform: lowercase;
+            font-style: italic;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1.2s ease-out 0.3s forwards;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: var(--color-moss);
+            opacity: 0.7;
+            animation: bounce 2s infinite;
+            font-family: var(--font-body);
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+        
+        /* Products Section */
+        .products-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 500;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.08em;
+        }
+        
+        .section-subtitle {
+            font-family: var(--font-script);
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--color-brown);
+            text-align: center;
+            margin-bottom: 4rem;
+            opacity: 0.85;
+            font-style: italic;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem 2rem;
+            padding: 1rem 0;
+        }
+        
+        /* Product Card */
+        .product-card {
+            background: var(--color-light);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(74, 103, 65, 0.12);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            position: relative;
+            border: 1px solid rgba(184, 212, 168, 0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(125, 157, 114, 0.25);
+            border-color: var(--color-light-green);
+        }
+        
+        .product-image-container {
+            width: 100%;
+            aspect-ratio: 3/4;
+            overflow: hidden;
+            background: linear-gradient(135deg, #e8ddd0 0%, #d9c9b8 50%, #d5e3cc 100%);
+            position: relative;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: brightness(0.98) saturate(1.1);
+        }
+        
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+            filter: brightness(1) saturate(1.15);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--color-accent);
+            color: var(--color-cream);
+            padding: 0.35rem 0.9rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: lowercase;
+            border-radius: 25px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-family: var(--font-body);
+            box-shadow: 0 2px 8px rgba(139, 111, 71, 0.3);
+        }
+        
+        .product-card:hover .product-badge {
+            opacity: 1;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, #f0e8db 100%);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-name {
+            font-family: var(--font-script);
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-description {
+            font-size: 1.2rem;
+            color: var(--color-text);
+            opacity: 0.75;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-family: var(--font-script);
+        }
+        
+        .product-price {
+            font-family: var(--font-script);
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .product-button {
+            margin-top: auto;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            background: #cf2c62;
+            color: var(--color-cream);
+            border: none;
+            border-radius: 30px;
+            font-family: var(--font-script);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: lowercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(74, 103, 65, 0.2);
+        }
+        
+        .product-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+        
+        .product-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .product-button:hover {
+            background: #cf2c62;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 103, 65, 0.35);
+        }
+        
+        .product-button:active {
+            transform: translateY(0);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(74, 103, 65, 0.5);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #f0e8db 0%, #e8ddd0 100%);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 20px 60px rgba(74, 103, 65, 0.3);
+            border: 2px solid rgba(184, 212, 168, 0.5);
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--color-moss);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            opacity: 1;
+        }
+        
+        .modal-title {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+        
+        .modal-text {
+            font-size: 0.95rem;
+            color: var(--color-text);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        
+        .instagram-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af);
+            color: var(--color-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(221, 42, 123, 0.3);
+        }
+        
+        .instagram-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(221, 42, 123, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background: #cf2c62;
+            color: var(--color-cream);
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '✦ ❋ ✦';
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            opacity: 0.3;
+            letter-spacing: 1rem;
+        }
+        
+        .footer-brand {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            margin-top: 1rem;
+        }
+        
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.85;
+            font-weight: 400;
+            font-family: var(--font-script);
+            font-style: italic;
+        }
+        
+        .footer-social {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+        }
+        
+        .footer-social a {
+            color: var(--color-light-green);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            font-family: var(--font-body);
+        }
+        
+        .footer-social a:hover {
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 2rem 1.5rem;
+            }
+            
+            .products-section {
+                padding: 3rem 1.5rem;
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Flechas para cambiar imágenes */
+        .product-image {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .product-image.active {
+            opacity: 1;
+            position: relative;
+        }
+
+        .image-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            color: var(--color-primary);
+            font-size: 2rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .product-card:hover .image-arrow {
+            opacity: 1;
+        }
+
+        .image-arrow:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .image-arrow.left {
+            left: 10px;
+        }
+
+        .image-arrow.right {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="brand-name">Oliver's</h1>
+        <p class="tagline"></p>
+        <div class="scroll-indicator">↓</div>
+    </header>
+
+    <!-- Products Section -->
+    <section class="products-section">
+        <h2 class="section-title">Mis prendas</h2>
+        <p class="section-subtitle"></p>
+        
+        <div class="products-grid">
+            
+            <!-- Producto 1 -->
+            <article class="product-card" data-product="Sweater Mostaza">
+                <div class="product-image-container">
+                    <img src="imagenes/p1a.jpeg" alt="Pollera de jean" class="product-image active">
+                    <img src="imagenes/p1b.jpeg" alt="Pollera de jean" class="product-image">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Pollera de jean</h3>
+                    <p class="product-description">-Ancho cintura: 34cm</p>
+                    <p class="product-description">-Ancho cadera: 46cm</p>
+                    <p class="product-description">-Ancho abajo: 51cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Mostaza')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 2 -->
+            <article class="product-card" data-product="Cardigan Tierra">
+                <div class="product-image-container">
+                    <img src="imagenes/p2a.jpeg" alt="Pollera de jean" class="product-image active">
+                    <img src="imagenes/p2b.jpeg" alt="Pollera de jean" class="product-image">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Pantalon de jean</h3>
+                    <p class="product-description">-Ancho cintura: 38cm</p>
+                    <p class="product-description">-Ancho cadera: 47cm</p>
+                    <p class="product-description">-Largo: 114cm</p>
+                    <p class="product-price">$25.000</p>
+                    <button class="product-button" onclick="openModal('Cardigan Tierra')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 3 -->
+            <article class="product-card" data-product="Pullover Verde">
+                <div class="product-image-container">
+                    <img src="imagenes/p3a.jpeg" alt="Pollera de jean" class="product-image active">
+                    <img src="imagenes/p3b.jpeg" alt="Pollera de jean" class="product-image">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Pantalon marron</h3>
+                    <p class="product-description">-Ancho cintura: 42cm</p>
+                    <p class="product-description">-Ancho cadera: 44cm</p>
+                    <p class="product-description">-Ancho abajo: 46cm</p>
+                    <p class="product-description">-Largo: 140cm</p>
+                    <p class="product-price">$15.000</p>
+                    <button class="product-button" onclick="openModal('Pullover Verde')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 4 -->
+            <article class="product-card" data-product="Chaleco Tejido">
+                <div class="product-image-container">
+                    <img src="imagenes/p4a.jpeg" alt="Pollera de jean" class="product-image active">
+                    <img src="imagenes/p4b.jpeg" alt="Pollera de jean" class="product-image">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Pantalon hippie</h3>
+                    <p class="product-description">-Ancho cintura: 37cm</p>
+                    <p class="product-description">-Ancho abajo: 47cm</p>
+                    <p class="product-description">-Largo: 100cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Chaleco Tejido')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 5 -->
+            <article class="product-card" data-product="Buzo Camel">
+                <div class="product-image-container">
+                    <img src="imagenes/botas1.jpeg" alt="Pollera de jean" class="product-image active">
+                    <img src="imagenes/botas2.jpeg" alt="Pollera de jean" class="product-image">
+                    <img src="imagenes/botas3.jpeg" alt="Pollera de jean" class="product-image">
+                    <img src="imagenes/botas4.jpeg" alt="Pollera de jean" class="product-image">
+                    <img src="imagenes/botas5.jpeg" alt="Pollera de jean" class="product-image">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Botas</h3>
+                    <p class="product-description">-Talle: 37</p>
+                    <p class="product-description">-Medida: 24cm</p>
+                    <p class="product-price">$15.000</p>
+                    <button class="product-button" onclick="openModal('Buzo Camel')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 6 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/remeraroja.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Top marron</h3>
+                    <p class="product-description">-Largo: 30cm</p>
+                    <p class="product-description">-Ancho: 30cm</p>
+                    <p class="product-price">$5.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 7 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/remeragris.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Musculosa gris</h3>
+                    <p class="product-description">-Largo: 47cm</p>
+                    <p class="product-description">-Ancho: 35cm</p>
+                    <p class="product-price">$5.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 8 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/mangalarga_roja.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Remera manga larga</h3>
+                    <p class="product-description">-Largo: 63cm</p>
+                    <p class="product-description">-Ancho: 52cm</p>
+                    <p class="product-price">$6.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 9 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/blancared.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Remera 3/4 de encaje</h3>
+                    <p class="product-description">-Largo: 64cm</p>
+                    <p class="product-description">-Ancho: 54cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 10  -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/blancaestrellas.jpeg " alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Top estrellitas</h3>
+                    <p class="product-description">-Largo: 45cm</p>
+                    <p class="product-description">-Ancho: 36cm</p>
+                    <p class="product-price">$4.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 11 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/mangalarga_rosa.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Remera 3/4</h3>
+                    <p class="product-description">-Largo: 62cm</p>
+                    <p class="product-description">-Ancho: 53cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 12 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/saquito.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Saquito</h3>
+                    <p class="product-description">-Largo: 56cm</p>
+                    <p class="product-description">-Ancho: 45cm</p>
+                    <p class="product-price">$5.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 13 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/camisa_cuadros.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Camisa cuadrillé</h3>
+                    <p class="product-description">-Largo: 79cm</p>
+                    <p class="product-description">-Ancho: 59cm</p>
+                    <p class="product-price">$10.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 14 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/camisa_negra.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Camisa traslucida</h3>
+                    <p class="product-description">-Largo: 67cm</p>
+                    <p class="product-description">-Ancho: 50cm</p>
+                    <p class="product-price">$6.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 15 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/saco.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Camisaco</h3>
+                    <p class="product-description">-Largo: 55cm</p>
+                    <p class="product-description">-Ancho: 50cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 16 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/vestido.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Vestido floreado</h3>
+                    <p class="product-description">-Largo: 93cm</p>
+                    <p class="product-description">-Ancho: 38cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 17 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/bolso.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Tote marron</h3>
+                    <p class="product-description">-Largo: 42cm</p>
+                    <p class="product-description">-Ancho: 32cm</p>
+                    <p class="product-price">$10.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+            <!-- Producto 18 -->
+            <article class="product-card" data-product="Sweater Rayas">
+                <div class="product-image-container">
+                    <img src="imagenes/cartera.jpeg" alt="Pollera de jean" class="product-image active">
+                    <button class="image-arrow left" onclick="changeImage(this, -1)">‹</button>
+                    <button class="image-arrow right" onclick="changeImage(this, 1)">›</button>
+                    <span class="product-badge">Disponible ✦</span>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cartera</h3>
+                    <p class="product-description">-Largo: 24cm</p>
+                    <p class="product-description">-Ancho: 30cm</p>
+                    <p class="product-price">$8.000</p>
+                    <button class="product-button" onclick="openModal('Sweater Rayas')">
+                        Consultar
+                    </button>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="contactModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <h3 class="modal-title">¡Consultá por esta prenda!</h3>
+            <p class="modal-text" id="modalProductName"></p>
+            <a href="#" class="instagram-button" id="instagramLink" target="_blank">
+                Contactar por Instagram
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-brand">Oliver's</div>
+        <p class="footer-text"></p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/meelarte" target="_blank">@meelarte</a>
+        </div>
+    </footer>
+
+    <script>
+        // Configuración - CAMBIAR ESTE USERNAME POR EL TUYO
+        const INSTAGRAM_USERNAME = 'meelarte';
+        
+        // Intersection Observer para animaciones al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, observerOptions);
+        
+        // Observar todas las tarjetas de productos
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Funciones del modal
+        function openModal(productName) {
+            const modal = document.getElementById('contactModal');
+            const modalProductName = document.getElementById('modalProductName');
+            const instagramLink = document.getElementById('instagramLink');
+            
+            // Configurar el texto del modal
+            modalProductName.textContent = `Te queremos ayudar con: ${productName}`;
+            
+            // Configurar el enlace de Instagram con mensaje predeterminado
+            const message = encodeURIComponent(`Hola! Me interesó la prenda: ${productName}`);
+            instagramLink.href = `https://ig.me/m/${INSTAGRAM_USERNAME}?text=${message}`;
+            
+            // Mostrar modal
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('contactModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Cerrar modal al hacer click fuera
+        document.getElementById('contactModal').addEventListener('click', (e) => {
+            if (e.target.id === 'contactModal') {
+                closeModal();
+            }
+        });
+        
+        // Cerrar modal con tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        // Scroll suave para el indicador
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            document.querySelector('.products-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+        // Cambiar imágenes de productos
+    function changeImage(button, direction) {
+    const container = button.parentElement;
+    const images = container.querySelectorAll('.product-image');
+    let currentIndex = 0;
+    
+    // Encontrar imagen actual
+    images.forEach((img, index) => {
+        if (img.classList.contains('active')) {
+            currentIndex = index;
+        }
+    });
+    
+    // Quitar active de la actual
+    images[currentIndex].classList.remove('active');
+    
+    // Calcular nueva imagen
+    let newIndex = currentIndex + direction;
+    if (newIndex < 0) newIndex = images.length - 1;
+    if (newIndex >= images.length) newIndex = 0;
+    
+    // Activar nueva imagen
+    images[newIndex].classList.add('active');
+}
+    </script>
+</body>
+</html>
